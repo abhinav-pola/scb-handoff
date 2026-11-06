@@ -1,0 +1,8 @@
+sources:
+  - name: main
+    inputs:
+      - "f2.csv"
+      - "f1.csv"
+    format: auto
+    schema: BaseSale
+    precedence: 10

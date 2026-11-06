@@ -1,0 +1,112 @@
+schema_version = "1.1"
+artifacts = []
+
+[task]
+name = "scb-handoff/foundation-sith"
+description = "Advanced Python code intelligence CLI for static and interpreter-assisted analysis. Supports completion, inference, goto-definition, references, signatures, project search, refactors (rename/inline/extract), syntax diagnostics, environment discovery, scope context reporting, and project-level configuration/settings overrides."
+authors = [
+    { name = "Gabriel Orlanski" },
+]
+keywords = [
+    "cli-tools",
+    "python",
+    "repl",
+    "static-analysis",
+    "interpreter-mode",
+    "code-intelligence",
+    "autocompletion",
+    "type-inference",
+    "refactoring",
+    "environment-management",
+    "project-configuration",
+    "ast-parsing",
+    "scb-problem",
+    "multi-step",
+    "pytest",
+]
+
+[metadata]
+difficulty = "hard"
+category = "developer-tools"
+tags = [
+    "cli-tools",
+    "python",
+    "repl",
+    "static-analysis",
+    "interpreter-mode",
+    "code-intelligence",
+    "autocompletion",
+    "type-inference",
+    "refactoring",
+    "environment-management",
+    "project-configuration",
+    "ast-parsing",
+]
+source = "scb-problems"
+source_problem = "sith"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+workdir = "/app"
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[environment.env]
+COLUMNS = "240"
+LINES = "60"
+PYTHONUNBUFFERED = "1"
+TERM = "xterm"
+
+[agent]
+timeout_sec = 7200.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[verifier]
+timeout_sec = 900.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[[steps]]
+name = "checkpoint_1"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 900.0

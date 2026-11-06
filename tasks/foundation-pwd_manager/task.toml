@@ -1,0 +1,104 @@
+schema_version = "1.1"
+artifacts = []
+
+[task]
+name = "scb-handoff/foundation-pwd_manager"
+description = "Interactive CLI password manager with encrypted local vault storage, master key unlock flow, search/add/edit/delete operations, category management, clipboard integration, tab completion, import/export, and vault locking controls."
+authors = [
+    { name = "Gabriel Orlanski" },
+]
+keywords = [
+    "interactive",
+    "encryption",
+    "secret-management",
+    "file-io",
+    "clipboard",
+    "tab-completion",
+    "import-export",
+    "state-management",
+    "scb-problem",
+    "multi-step",
+    "pytest",
+]
+
+[metadata]
+difficulty = "medium"
+category = "cli-tools"
+tags = [
+    "interactive",
+    "encryption",
+    "secret-management",
+    "file-io",
+    "clipboard",
+    "tab-completion",
+    "import-export",
+    "state-management",
+]
+source = "scb-problems"
+source_problem = "pwd_manager"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+workdir = "/app"
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[environment.env]
+COLUMNS = "240"
+LINES = "60"
+PYTHONUNBUFFERED = "1"
+TERM = "xterm"
+
+[agent]
+timeout_sec = 7200.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[verifier]
+timeout_sec = 1350.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[[steps]]
+name = "checkpoint_1"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 1350.0

@@ -1,0 +1,8 @@
+sources:
+  - name: main
+    inputs:
+      - "data.csv"
+      - "data.tsv"
+    format: auto
+    schema: Event
+    precedence: 10

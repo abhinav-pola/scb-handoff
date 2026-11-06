@@ -1,0 +1,106 @@
+schema_version = "1.1"
+artifacts = []
+
+[task]
+name = "scb-handoff/foundation-l2m"
+description = "Command-line tool that converts LaTeX source files to KaTeX-compatible Markdown"
+authors = [
+    { name = "Gabriel Orlanski" },
+]
+keywords = [
+    "cli-tools",
+    "latex",
+    "markdown",
+    "text-processing",
+    "parsing",
+    "conversion",
+    "code-generation",
+    "file-io",
+    "format-translation",
+    "scb-problem",
+    "multi-step",
+    "pytest",
+]
+
+[metadata]
+difficulty = "easy"
+category = "developer-tools"
+tags = [
+    "cli-tools",
+    "latex",
+    "markdown",
+    "text-processing",
+    "parsing",
+    "conversion",
+    "code-generation",
+    "file-io",
+    "format-translation",
+]
+source = "scb-problems"
+source_problem = "l2m"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+workdir = "/app"
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[environment.env]
+COLUMNS = "240"
+LINES = "60"
+PYTHONUNBUFFERED = "1"
+TERM = "xterm"
+
+[agent]
+timeout_sec = 7200.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[verifier]
+timeout_sec = 900.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[[steps]]
+name = "checkpoint_1"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 900.0

@@ -1,0 +1,7 @@
+sources:
+  - name: main
+    inputs:
+      - "input.tsv"
+    format: auto
+    schema: BaseSale
+    precedence: 10

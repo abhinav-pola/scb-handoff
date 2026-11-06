@@ -1,0 +1,112 @@
+schema_version = "1.1"
+artifacts = []
+
+[task]
+name = "scb-handoff/foundation-file_merger"
+description = "CLI that merges data files (CSV, TSV, JSONL, Parquet) into sorted, partitioned CSV output. Handles schema alignment, compression, and external sorting. Adds Hive-style partitioning, file sharding, and nested type support."
+authors = [
+    { name = "Gabriel Orlanski" },
+]
+keywords = [
+    "csv",
+    "tsv",
+    "jsonl",
+    "parquet",
+    "cli-tools",
+    "schema-resolution",
+    "type-inference",
+    "external-sorting",
+    "memory-constrained",
+    "partitioning",
+    "nested-types",
+    "etl-pipeline",
+    "scb-problem",
+    "multi-step",
+    "pytest",
+]
+
+[metadata]
+difficulty = "medium"
+category = "data-processing"
+tags = [
+    "csv",
+    "tsv",
+    "jsonl",
+    "parquet",
+    "cli-tools",
+    "schema-resolution",
+    "type-inference",
+    "external-sorting",
+    "memory-constrained",
+    "partitioning",
+    "nested-types",
+    "etl-pipeline",
+]
+source = "scb-problems"
+source_problem = "file_merger"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+workdir = "/app"
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[environment.env]
+COLUMNS = "240"
+LINES = "60"
+PYTHONUNBUFFERED = "1"
+TERM = "xterm"
+
+[agent]
+timeout_sec = 7200.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[verifier]
+timeout_sec = 600.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[[steps]]
+name = "checkpoint_1"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 600.0
