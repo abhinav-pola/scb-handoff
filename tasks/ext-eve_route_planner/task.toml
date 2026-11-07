@@ -1,0 +1,134 @@
+schema_version = "1.1"
+artifacts = []
+
+[task]
+name = "scb-handoff/ext-eve_route_planner"
+description = "EVE Online route planner with realistic warp physics (acceleration/deceleration, gate locks). Adds cargo hauling with manifests and multi-trip planning, then contract optimization to select the most profitable jobs given time and ISK/jump constraints."
+authors = [
+    { name = "Gabriel Orlanski" },
+]
+keywords = [
+    "pathfinding",
+    "graph-algorithms",
+    "optimization",
+    "physics-simulation",
+    "logistics",
+    "cli-tools",
+    "data-processing",
+    "constraint-satisfaction",
+    "game-mechanics",
+    "scb-problem",
+    "multi-step",
+    "pytest",
+]
+
+[metadata]
+difficulty = "medium"
+category = "algorithms"
+tags = [
+    "pathfinding",
+    "graph-algorithms",
+    "optimization",
+    "physics-simulation",
+    "logistics",
+    "cli-tools",
+    "data-processing",
+    "constraint-satisfaction",
+    "game-mechanics",
+]
+source = "scb-problems"
+source_problem = "eve_route_planner"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+workdir = "/app"
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[environment.env]
+COLUMNS = "240"
+LINES = "60"
+PYTHONUNBUFFERED = "1"
+TERM = "xterm"
+
+[agent]
+timeout_sec = 7200.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[verifier]
+timeout_sec = 1800.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[[steps]]
+name = "checkpoint_2"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 1800.0
+
+[[steps]]
+name = "checkpoint_3"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 1800.0

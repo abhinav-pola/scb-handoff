@@ -1,0 +1,132 @@
+schema_version = "1.1"
+artifacts = []
+
+[task]
+name = "scb-handoff/ext-mvvault"
+description = "CLI tool for creating and maintaining local vaults that archive content metadata from an online media platform. Tracks timestamped field-level history across three catalog schema versions (v1: flat entries with UNIX-epoch keys, v2: categorized with ISO keys, v3: full format with removal tracking and annotations). Supports selective sync with media downloads, format-aware digest reports, a local HTTP viewer with version-adaptive routing and chart timestamp normalization, and annotation-triggered auto-migration."
+authors = [
+    { name = "Gabriel Orlanski" },
+]
+keywords = [
+    "media-archival",
+    "metadata-tracking",
+    "http-server",
+    "json",
+    "file-io",
+    "migration",
+    "crud",
+    "history-tracking",
+    "scb-problem",
+    "multi-step",
+    "pytest",
+]
+
+[metadata]
+difficulty = "medium"
+category = "cli-tools"
+tags = [
+    "media-archival",
+    "metadata-tracking",
+    "http-server",
+    "json",
+    "file-io",
+    "migration",
+    "crud",
+    "history-tracking",
+]
+source = "scb-problems"
+source_problem = "mvvault"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+workdir = "/app"
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[environment.env]
+COLUMNS = "240"
+LINES = "60"
+PYTHONUNBUFFERED = "1"
+TERM = "xterm"
+
+[agent]
+timeout_sec = 7200.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[verifier]
+timeout_sec = 900.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[[steps]]
+name = "checkpoint_2"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 900.0
+
+[[steps]]
+name = "checkpoint_3"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 900.0

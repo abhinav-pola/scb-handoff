@@ -1,0 +1,136 @@
+schema_version = "1.1"
+artifacts = []
+
+[task]
+name = "scb-handoff/ext-eve_market_tools"
+description = "REST API for EVE Online market data. Ingests market orders, builds price books, and provides regional stats and hub comparisons. Adds reprocessing yield calculations, minimum-cost ore optimization across hubs, and profit-finding for arbitrage and hauling."
+authors = [
+    { name = "Gabriel Orlanski" },
+]
+keywords = [
+    "rest-api",
+    "data-processing",
+    "optimization",
+    "market-analysis",
+    "csv-parsing",
+    "stateful-service",
+    "financial-calculations",
+    "constraint-solving",
+    "domain-modeling",
+    "json",
+    "scb-problem",
+    "multi-step",
+    "pytest",
+]
+
+[metadata]
+difficulty = "hard"
+category = "web"
+tags = [
+    "rest-api",
+    "data-processing",
+    "optimization",
+    "market-analysis",
+    "csv-parsing",
+    "stateful-service",
+    "financial-calculations",
+    "constraint-solving",
+    "domain-modeling",
+    "json",
+]
+source = "scb-problems"
+source_problem = "eve_market_tools"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+workdir = "/app"
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[environment.env]
+COLUMNS = "240"
+LINES = "60"
+PYTHONUNBUFFERED = "1"
+TERM = "xterm"
+
+[agent]
+timeout_sec = 7200.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[verifier]
+timeout_sec = 3600.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[[steps]]
+name = "checkpoint_2"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 3600.0
+
+[[steps]]
+name = "checkpoint_3"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 3600.0

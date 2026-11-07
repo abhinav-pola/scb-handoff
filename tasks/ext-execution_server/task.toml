@@ -1,0 +1,134 @@
+schema_version = "1.1"
+artifacts = []
+
+[task]
+name = "scb-handoff/ext-execution_server"
+description = "HTTP server that executes shell commands and returns results. Adds file tracking with globs, multi-format output support, command chains with hooks, caching, persistent environments with concurrency modes, and job scheduling with queues, templates, and dependency graphs."
+authors = [
+    { name = "Gabriel Orlanski" },
+]
+keywords = [
+    "http-server",
+    "process-execution",
+    "state-management",
+    "concurrency",
+    "caching",
+    "job-scheduling",
+    "file-io",
+    "glob-patterns",
+    "dependency-graphs",
+    "scb-problem",
+    "multi-step",
+    "pytest",
+]
+
+[metadata]
+difficulty = "easy"
+category = "networking"
+tags = [
+    "http-server",
+    "process-execution",
+    "state-management",
+    "concurrency",
+    "caching",
+    "job-scheduling",
+    "file-io",
+    "glob-patterns",
+    "dependency-graphs",
+]
+source = "scb-problems"
+source_problem = "execution_server"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+workdir = "/app"
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[environment.env]
+COLUMNS = "240"
+LINES = "60"
+PYTHONUNBUFFERED = "1"
+TERM = "xterm"
+
+[agent]
+timeout_sec = 7200.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[verifier]
+timeout_sec = 7200.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[[steps]]
+name = "checkpoint_2"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 7200.0
+
+[[steps]]
+name = "checkpoint_3"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 7200.0

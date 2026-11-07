@@ -1,0 +1,134 @@
+schema_version = "1.1"
+artifacts = []
+
+[task]
+name = "scb-handoff/ext-test_translator"
+description = "CLI test-harness translation engine that generates and runs language-specific tester files (Python, JavaScript, TypeScript) from a structured tests.py spec, with line-based test discovery, deep equality checking, JSON result output, and strict generate-before-test enforcement."
+authors = [
+    { name = "Gabriel Orlanski" },
+]
+keywords = [
+    "code-generation",
+    "test-harness",
+    "multi-language",
+    "python",
+    "javascript",
+    "typescript",
+    "test-frameworks",
+    "parsing",
+    "file-io",
+    "scb-problem",
+    "multi-step",
+    "pytest",
+]
+
+[metadata]
+difficulty = "hard"
+category = "developer-tools"
+tags = [
+    "code-generation",
+    "test-harness",
+    "multi-language",
+    "python",
+    "javascript",
+    "typescript",
+    "test-frameworks",
+    "parsing",
+    "file-io",
+]
+source = "scb-problems"
+source_problem = "test_translator"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+workdir = "/app"
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[environment.env]
+COLUMNS = "240"
+LINES = "60"
+PYTHONUNBUFFERED = "1"
+TERM = "xterm"
+
+[agent]
+timeout_sec = 7200.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[verifier]
+timeout_sec = 3600.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[[steps]]
+name = "checkpoint_2"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 3600.0
+
+[[steps]]
+name = "checkpoint_3"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 3600.0

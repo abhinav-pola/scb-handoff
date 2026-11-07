@@ -1,0 +1,144 @@
+schema_version = "1.1"
+artifacts = []
+
+[task]
+name = "scb-handoff/ext-metric_transform_lang"
+description = "Interpreter for MTL, a DSL for processing event streams. Handles CSV/TSV/Parquet input, aggregations, window functions (lag/lead), joins with temporal constraints, and resumable execution. Output is deterministic JSON."
+authors = [
+    { name = "Gabriel Orlanski" },
+]
+keywords = [
+    "dsl",
+    "interpreter",
+    "data-processing",
+    "streaming",
+    "json",
+    "ndjson",
+    "aggregation",
+    "window-functions",
+    "schema-validation",
+    "multi-format-io",
+    "parquet",
+    "deterministic-execution",
+    "stateful-processing",
+    "scb-problem",
+    "multi-step",
+    "pytest",
+]
+
+[metadata]
+difficulty = "hard"
+category = "dsl"
+tags = [
+    "dsl",
+    "interpreter",
+    "data-processing",
+    "streaming",
+    "json",
+    "ndjson",
+    "aggregation",
+    "window-functions",
+    "schema-validation",
+    "multi-format-io",
+    "parquet",
+    "deterministic-execution",
+    "stateful-processing",
+    "relational-joins",
+    "type-system",
+]
+source = "scb-problems"
+source_problem = "metric_transform_lang"
+
+[environment]
+build_timeout_sec = 600.0
+cpus = 1
+memory_mb = 2048
+storage_mb = 10240
+workdir = "/app"
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[environment.env]
+COLUMNS = "240"
+LINES = "60"
+PYTHONUNBUFFERED = "1"
+TERM = "xterm"
+
+[agent]
+timeout_sec = 7200.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "openrouter.ai",
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[verifier]
+timeout_sec = 600.0
+network_mode = "allowlist"
+allowed_hosts = [
+    "pypi.org",
+    "files.pythonhosted.org",
+]
+
+[[steps]]
+name = "checkpoint_2"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 600.0
+
+[[steps]]
+name = "checkpoint_3"
+
+[[steps.artifacts]]
+source = "/app"
+destination = "app"
+exclude = [
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".ruff_cache",
+    ".mypy_cache",
+    ".git",
+    "node_modules",
+    "target",
+    "dist",
+    "build",
+]
+
+[steps.min_reward]
+core_pass_rate = 0.0
+strict_pass_rate = 0.0
+
+[steps.agent]
+timeout_sec = 7200.0
+
+[steps.verifier]
+timeout_sec = 600.0
