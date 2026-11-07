@@ -1,2 +1,0 @@
-entrypoint: get_deeply_nested
-tol: 0.01

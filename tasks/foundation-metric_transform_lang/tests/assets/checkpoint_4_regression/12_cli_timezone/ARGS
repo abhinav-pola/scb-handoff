@@ -1,1 +1,0 @@
---dsl pipeline.mtl --ingest-config ingest.yaml --tz America/New_York --timestamp-format "%Y-%m-%d %H:%M:%S"

@@ -69,7 +69,6 @@ allowed_hosts = [
 timeout_sec = 3600.0
 network_mode = "allowlist"
 allowed_hosts = [
-    "openrouter.ai",
     "pypi.org",
     "files.pythonhosted.org",
 ]

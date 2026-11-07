@@ -1,2 +1,0 @@
-entrypoint: get_decimal_approx
-tol: 0.01

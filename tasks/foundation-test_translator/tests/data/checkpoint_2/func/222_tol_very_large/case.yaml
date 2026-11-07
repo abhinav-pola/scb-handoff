@@ -1,2 +1,0 @@
-entrypoint: get_approx
-tol: 1e10
